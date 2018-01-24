@@ -2,6 +2,7 @@ import bodyParser from 'koa-bodyparser';
 import logger from 'koa-logger';
 import {IS_DEV} from '../utils/env';
 import error from './error';
+import tokenHandler from './token-handler';
 
 export default (app) => {
   if(IS_DEV){
@@ -10,4 +11,5 @@ export default (app) => {
 
   app.use(error());
   app.use(bodyParser());
+  app.use(tokenHandler());
 };

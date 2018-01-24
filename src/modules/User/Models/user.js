@@ -22,7 +22,7 @@ const UserSchema = new Schema({
       required: 'Username is required'
     }
   }, {
-    timestamp: true
+    timestamps: true
   }
 );
 
@@ -39,8 +39,12 @@ UserSchema.pre('save', function(next) {
   next();
 });
 
+UserSchema.methods.comparePasswords = function(password) {
+  return bcrypt.compareSync(password, this.password);
+};
+
 UserSchema.statics.findOneWithPublicFields = function(params, cb) {
-  return this.findOne(params, cb).select({password: 0, __v: 0});
+  return this.findOne(params, cb).select({password: 0, __v: 0, createdAt: 0, updatedAt: 0});
 };
 
 export default mongoose.model('user', UserSchema);

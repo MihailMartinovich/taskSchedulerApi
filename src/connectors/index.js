@@ -1,8 +1,15 @@
 import {MONGO_URI} from "../config";
 import mongooseConnector from './mongoose-connector';
+import server from '../server';
 
-function initializeConnectors() {
-  mongooseConnector(MONGO_URI);
+
+async function initializeConnectors() {
+  try {
+    mongooseConnector(MONGO_URI);
+  } catch(e) {
+    server.close();
+    console.log(e);
+  }
 }
 
 export {

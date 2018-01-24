@@ -2,5 +2,8 @@
   "env": "production",
   "mongo": {
     "uri": "mongo-production"
+  },
+  "jwt": {
+    "secret": "0b7c595a-ca98-4a78-b117-ef1bb141c44a"
   }
 }
