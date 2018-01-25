@@ -15,6 +15,7 @@
     "dotenv": "^4.0.0",
     "eslint": "^4.16.0",
     "eslint-config-google": "^0.9.1",
+    "faker": "^4.1.0",
     "jsonwebtoken": "^8.1.1",
     "keymirror": "^0.1.1",
     "koa-bodyparser": "^4.2.0",
@@ -35,7 +36,8 @@
     "lint:fix": "eslint --fix src",
     "start": "babel-node src/server.js",
     "dev": "nodemon --exec \"set NODE_ENV=development&& npm run start\"",
-    "prod": "set NODE_ENV=production&& npm run start"
+    "prod": "set NODE_ENV=production&& npm run start",
+    "seed": "set NODE_ENV=development&&babel-node src/seeds"
   },
   "repository": {
     "type": "git",
