@@ -1,5 +1,5 @@
 import pick from 'lodash';
-import { User } from '../../User/';
+import { User } from '../../user/';
 import jwtService from '../../../services/jwt-service';
 
 const SIGNIN_ERROR_NUMBER = 400;
@@ -20,7 +20,7 @@ class authController {
 
     const user = await User.findOne({email});
     if(!user){
-      ctx.throw(SIGNIN_ERROR_NUMBER, 'User with specified email not found');
+      ctx.throw(SIGNIN_ERROR_NUMBER, 'user with specified email not found');
     }
 
     if(!user.comparePasswords(password)){

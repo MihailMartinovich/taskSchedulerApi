@@ -1,5 +1,5 @@
 import JWTService from '../services/jwt-service';
-import {User} from '../modules/User';
+import {User} from '../modules/user';
 
 export default () => async (ctx, next) => {
   const {authorization} = ctx.headers;

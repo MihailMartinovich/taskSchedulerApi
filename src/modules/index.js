@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import auth from './Auth/index';
+import auth from './auth/index';
 import {API_PREFIX} from "../constants/prefixes";
 
 const router = new Router({ prefix: API_PREFIX});

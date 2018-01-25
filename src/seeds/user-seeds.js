@@ -1,6 +1,6 @@
 import faker from 'faker';
 import _ from 'lodash';
-import {User} from '../modules/User';
+import {User} from '../modules/user';
 
 const PASSWORD = '1111';
 
@@ -16,6 +16,13 @@ function initUserSeeds() {
 
     promises.push(userPromise);
   });
+
+  let userPromise = User.create({
+    email:`admin@admin.com`,
+    userName: 'admin',
+    password: 'admin'
+  });
+  promises.push(userPromise);
 
   return Promise.all(promises);
 }
