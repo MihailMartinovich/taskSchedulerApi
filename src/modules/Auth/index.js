@@ -1,7 +1,7 @@
 import Router from 'koa-router';
-import authController from './controllers/auth-controller';
+import authController from './controllers/authController';
 import {AUTH_PREFIX} from "../../constants/prefixes";
-import checkUserMiddleware from "../../middlewares/user/check-user";
+import checkUserMiddleware from "../../middlewares/user/checkUserPermissions";
 
 const router = new Router({prefix: AUTH_PREFIX});
 
