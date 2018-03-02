@@ -13,13 +13,18 @@ const TaskSchema = new Schema({
       type: Schema.Types.ObjectId,
       required: 'Owner is required',
       ref: 'User'
+    },
+    board: {
+      type: Schema.Types.ObjectId,
+      required: 'Board is required',
+      ref: 'Board'
     }
   }, {
     timestamps: true
   }
 );
 
-TaskSchema.statics.createFields = ['title', 'description'];
+TaskSchema.statics.createFields = ['title', 'description', 'board'];
 
 TaskSchema.statics.findOneWithPublicFields = function(params, cb) {
   return this.findOne(params, cb).select({__v: 0, createdAt: 0, updatedAt: 0});

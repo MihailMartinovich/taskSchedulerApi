@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import taskController from './controllers/task-Controller';
+import taskController from './controllers/taskController';
 import {TASK_PREFIX} from "../../constants/prefixes";
 import checkUserMiddleware from "../../middlewares/user/checkUserPermissions";
 

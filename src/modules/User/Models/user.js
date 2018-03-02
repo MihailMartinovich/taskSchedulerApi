@@ -23,7 +23,12 @@ const UserSchema = new Schema({
       lowercase: true,
       required: 'Username is required',
       trim: true
-    }
+    },
+    boards: [{
+      type: Schema.Types.ObjectId,
+      required: 'Board is required',
+      ref: 'Board'
+    }]
   }, {
     timestamps: true
   }
