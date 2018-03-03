@@ -1,5 +1,5 @@
 import {MONGO_URI} from "../config";
-import mongooseConnector from './mongoose-connector';
+import mongooseConnector from './mongooseConnector';
 import server from '../server';
 
 

@@ -22,6 +22,7 @@ function initUserSeeds() {
     userName: 'admin',
     password: 'admin'
   });
+
   promises.push(userPromise);
 
   return Promise.all(promises);

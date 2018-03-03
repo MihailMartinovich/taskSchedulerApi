@@ -3,12 +3,22 @@ import boardController from './controllers/boardController';
 import { BOARD_PREFIX } from "../../constants/prefixes";
 import checkUserMiddleware from "../../middlewares/user/checkUserPermissions";
 
-const router = new Router({prefix: BOARD_PREFIX});
+const boardRouter = new Router({prefix: BOARD_PREFIX});
 
-router.get('/:id', boardController.get);
-router.get('/', boardController.getAll);
-router.post('/', boardController.create);
-router.put('/:id', boardController.update);
-router.delete('/:id', boardController.delete);
+const initBoardRouter = (middleware) => {
+  if(middleware){
+    boardRouter.use(middleware)
+  }
+  boardRouter.get('/:id', boardController.get);
+  boardRouter.get('/', boardController.getAll);
+  boardRouter.post('/', boardController.create);
+  boardRouter.put('/:id', boardController.update);
+  boardRouter.delete('/:id', boardController.delete);
 
-export default router.routes();
+  return boardRouter.routes();
+};
+
+export {
+  boardRouter,
+  initBoardRouter
+};

@@ -1,6 +1,6 @@
 import { MONGO_URI } from "../config";
-import mongooseConnector from '../connectors/mongoose-connector';
-import initUserSeeds from './user-seeds';
+import mongooseConnector from '../connectors/mongooseConnector';
+import initUserSeeds from './userSeeds';
 
 initSeeds();
 

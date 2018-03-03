@@ -1,12 +1,12 @@
 import Koa from 'koa2';
 import initializeConnectors from './connectors';
-import initUnprotectedRoutes from './routeHandlers/unprotected-routes';
+import initRoutes from './routeHandlers/';
 import modules from './modules';
 
 initializeConnectors();
 const app = new Koa();
 
-initUnprotectedRoutes(app);
+initRoutes(app);
 
 app.use(modules);
 
