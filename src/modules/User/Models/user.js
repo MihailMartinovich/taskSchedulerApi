@@ -17,7 +17,7 @@ const UserSchema = new Schema({
       required: 'Password is required',
       trim: true
     },
-    userName: {
+    username: {
       type: String,
       unique: 'user with username "VALUE" already exist',
       lowercase: true,
@@ -34,7 +34,7 @@ const UserSchema = new Schema({
   }
 );
 
-UserSchema.statics.createFields = ['email', 'password', 'username'];
+UserSchema.statics.createFields = ['email', 'password', 'repeatPassword', 'username'];
 
 UserSchema.pre('save', function(next) {
   if(!this.isModified('password')){
@@ -49,6 +49,10 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.methods.comparePasswords = function(password) {
   return bcrypt.compareSync(password, this.password);
+};
+
+UserSchema.statics.checkRepeatPasswordMatching = function(model) {
+  return model.password === model.repeatPassword;
 };
 
 UserSchema.statics.findOneWithPublicFields = function(params, cb) {

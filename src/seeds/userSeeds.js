@@ -1,6 +1,6 @@
 import faker from 'faker';
 import _ from 'lodash';
-import {User} from '../modules/user';
+import { User } from '../modules/user';
 
 const PASSWORD = '1111';
 
@@ -10,7 +10,7 @@ function initUserSeeds() {
   _.times(10, (i) =>{
     const userPromise = User.create({
       email:`${faker.lorem.word(2,10)}.${faker.lorem.word(2,5)}.com`,
-      userName: `${faker.lorem.word(2,10)}` + i,
+      username: `${faker.lorem.word(2,10)}` + i,
       password: PASSWORD
     });
 
@@ -19,7 +19,7 @@ function initUserSeeds() {
 
   let userPromise = User.create({
     email:`admin@admin.com`,
-    userName: 'admin',
+    username: 'admin',
     password: 'admin'
   });
 
