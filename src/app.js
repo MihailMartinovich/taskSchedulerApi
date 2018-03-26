@@ -6,7 +6,9 @@ import initRoutes from './routeHandlers/';
 import modules from './modules';
 
 initializeConnectors();
+
 const app = new Koa();
+
 app.use(Cors({
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Methods': 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'

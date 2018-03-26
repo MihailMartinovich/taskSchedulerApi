@@ -52,7 +52,7 @@ UserSchema.methods.comparePasswords = function(password) {
 };
 
 UserSchema.statics.checkRepeatPasswordMatching = function(model) {
-  return model.password === model.repeatPassword;
+  return (model.password && model.repeatPassword && model.password === model.repeatPassword);
 };
 
 UserSchema.statics.findOneWithPublicFields = function(params, cb) {
