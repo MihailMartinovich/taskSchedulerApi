@@ -5,11 +5,13 @@ import { SUCCESS } from '../../../constants/HTTPStatuses';
 class BoardController {
   static async create(ctx) {
     let newBoardData = pick(ctx.request.body, Board.createFields).value();
+
     newBoardData.owner = ctx.loggedUser._id;
 
     let { _id } = await Board.create(newBoardData);
+
     let board = await Board.findOneWithPublicFields({_id});
-    ctx.body = {data: board};
+    ctx.body = board;
   }
 
   static async update(ctx) {
@@ -18,7 +20,7 @@ class BoardController {
 
     let updatedBoard = await Board.findByIdAndUpdate(id, { $set : newBoardData}, { new: true} );
 
-    ctx.body = { data: updatedBoard };
+    ctx.body = updatedBoard;
   }
 
   static async delete(ctx) {
@@ -27,21 +29,22 @@ class BoardController {
 
     if(isDeleted && isDeleted.n > 0){
       ctx.status = SUCCESS;
+      ctx.body = id;
     }
   }
 
   static async get(ctx) {
     let id = ctx.params.id;
-    let board = await Board.findOne({ _id: id });
+    let board = await Board.findOne({ _id: id }).populate('tasks');
 
     ctx.body = { data: board };
   }
 
   static async getAll(ctx) {
     let ownerId = ctx.loggedUser._id;
-    let boards = await Board.find({ owner: ownerId });
+    let boards = await Board.find({ owner: ownerId }).populate('tasks');
 
-    ctx.body = {data: boards};
+    ctx.body = boards;
   }
 }
 

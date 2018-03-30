@@ -5,6 +5,9 @@ const BoardSchema = new Schema({
       type: String,
       required: 'Task title is required'
     },
+    description: {
+      type: String
+    },
     tasks: [{
       type: Schema.Types.ObjectId,
       ref: 'Task'
@@ -19,7 +22,7 @@ const BoardSchema = new Schema({
   }
 );
 
-BoardSchema.statics.createFields = ['title'];
+BoardSchema.statics.createFields = ['title', 'description'];
 
 BoardSchema.statics.findOneWithPublicFields = function(params, cb) {
   return this.findOne(params, cb).select({__v: 0, createdAt: 0, updatedAt: 0});
