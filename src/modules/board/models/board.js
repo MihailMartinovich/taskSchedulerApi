@@ -1,4 +1,5 @@
 import mongoose, {Schema} from 'mongoose';
+import { User } from '../../user/models/';
 
 const BoardSchema = new Schema({
     title: {
@@ -28,4 +29,4 @@ BoardSchema.statics.findOneWithPublicFields = function(params, cb) {
   return this.findOne(params, cb).select({__v: 0, createdAt: 0, updatedAt: 0});
 };
 
-export default mongoose.model('board', BoardSchema);
+export default mongoose.model('Board', BoardSchema);

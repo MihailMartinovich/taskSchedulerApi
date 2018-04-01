@@ -9,7 +9,7 @@ class TaskController {
 
     let {_id} = await Task.create(newTaskData);
     let task = await Task.findOneWithPublicFields({_id});
-    ctx.body = {data: task};
+    ctx.body = task;
   }
 
   static async update(ctx) {
@@ -18,14 +18,14 @@ class TaskController {
 
     let updatedTask = await Task.findByIdAndUpdate(id, { $set :newTaskData}, { new: true} );
 
-    ctx.body = { data: updatedTask };
+    ctx.body = updatedTask;
   }
 
   static async delete(ctx) {
     let id = ctx.params.id;
-    let isDeleted = await Task.remove({_id: id});
+    let deleted = await Task.removeTaskFromBoard({_id: id});
 
-    if(isDeleted && isDeleted.n > 0){
+    if(deleted){
       ctx.status = SUCCESS;
     }
   }
@@ -34,14 +34,14 @@ class TaskController {
     let id = ctx.params.id;
     let task = await Task.findOne({_id: id});
 
-    ctx.body = {data: task};
+    ctx.body = task;
   }
 
   static async getAll(ctx) {
     let ownerId = ctx.loggedUser._id;
     let tasks = await Task.find({ owner: ownerId });
 
-    ctx.body = {data: tasks};
+    ctx.body = tasks;
   }
 }
 

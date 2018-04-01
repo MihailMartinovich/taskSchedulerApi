@@ -42,7 +42,8 @@ class BoardController {
 
   static async getAll(ctx) {
     let ownerId = ctx.loggedUser._id;
-    let boards = await Board.find({ owner: ownerId }).populate('tasks');
+
+    let boards = await Board.find({ owner: ownerId }).populate('tasks').exec();
 
     ctx.body = boards;
   }
