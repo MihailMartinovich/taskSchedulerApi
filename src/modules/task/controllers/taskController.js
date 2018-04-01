@@ -27,6 +27,7 @@ class TaskController {
 
     if(deleted){
       ctx.status = SUCCESS;
+      ctx.body = deleted;
     }
   }
 
