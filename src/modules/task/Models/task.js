@@ -9,26 +9,30 @@ const TaskSchema = new Schema({
     description: {
       type: String,
     },
-    owner: {
-      type: Schema.Types.ObjectId,
-      required: 'Owner is required',
-      ref: 'User'
-    },
     completed: {
-      type: Boolean//,
-      //default: false
+      type: Boolean,
+      default: false
+    },
+    order: {
+      type: Number,
+      default: 0
     },
     board: {
       type: Schema.Types.ObjectId,
       required: 'Board is required',
       ref: 'Board'
+    },
+    owner: {
+      type: Schema.Types.ObjectId,
+      required: 'Owner is required',
+      ref: 'User'
     }
   }, {
     timestamps: true
   }
 );
 
-TaskSchema.statics.createFields = ['title', 'description', 'board'];
+TaskSchema.statics.createFields = ['title', 'description', 'board', 'completed', 'order'];
 
 TaskSchema.post('save', async function(task, next) {
   let board = await Board.findOne({ _id: task.board });
@@ -43,7 +47,6 @@ TaskSchema.post('save', async function(task, next) {
 });
 
 TaskSchema.statics.removeTaskFromBoard = async function(data) {
-  console.log(data);
   let task = await this.findOne(data);
 
   let deleted = await task.remove();
@@ -59,6 +62,18 @@ TaskSchema.statics.removeTaskFromBoard = async function(data) {
   }
 
   return deleted;
+};
+
+TaskSchema.statics.updateTaskSet = async function(data) {
+  let updatedTasks = [];
+  console.log('-----------------------------------');
+  for (var currentValue of data){
+    console.log(currentValue.order + ' ' + currentValue.title);
+    let updated = await this.findOneAndUpdate({_id: currentValue._id}, { $set: { order: currentValue.order }}, {new: true});
+    updatedTasks.push(updated);
+  }
+
+  return updatedTasks;
 };
 
 TaskSchema.statics.findOneWithPublicFields = function(params, cb) {

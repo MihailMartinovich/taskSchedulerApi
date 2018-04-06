@@ -1,10 +1,11 @@
-import pick from 'lodash';
+import _ from 'lodash';
+import partialRight from 'lodash.partialright';
 import { Task } from '../../task/Models/';
 import { SUCCESS } from '../../../constants/HTTPStatuses';
 
 class TaskController {
   static async create(ctx) {
-    let newTaskData = pick(ctx.request.body, Task.createFields).value();
+    let newTaskData = _.pick(ctx.request.body, Task.createFields);
     newTaskData.owner = ctx.loggedUser._id;
 
     let {_id} = await Task.create(newTaskData);
@@ -14,11 +15,19 @@ class TaskController {
 
   static async update(ctx) {
     let id = ctx.params.id;
-    let newTaskData = pick(ctx.request.body, Task.createFields).value();
+    let newTaskData = _.pick(ctx.request.body, Task.createFields);
 
     let updatedTask = await Task.findByIdAndUpdate(id, { $set :newTaskData}, { new: true} );
 
     ctx.body = updatedTask;
+  }
+
+  static async updateSet(ctx) {
+    let data = ctx.request.body;
+
+    let updatedTasks = await Task.updateTaskSet(data);
+
+    ctx.body = updatedTasks;
   }
 
   static async delete(ctx) {

@@ -37,7 +37,7 @@ class BoardController {
     let id = ctx.params.id;
     let board = await Board.findOne({ _id: id }).populate('tasks');
 
-    ctx.body = { data: board };
+    ctx.body = board;
   }
 
   static async getAll(ctx) {

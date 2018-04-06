@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import taskController from './controllers/taskController';
+import taskController from './controllers/TaskController';
 import { TASK_PREFIX } from "../../constants/prefixes";
 import checkUserPermissionsMiddleware from "../../middlewares/user/checkUserPermissions";
 
@@ -14,6 +14,7 @@ const initTaskRouter = (middleware) => {
   taskRouter.get('/', taskController.getAll);
   taskRouter.post('/', taskController.create);
   taskRouter.put('/:id', taskController.update);
+  taskRouter.put('/', taskController.updateSet);
   taskRouter.delete('/:id', taskController.delete);
 
   return taskRouter.routes();
