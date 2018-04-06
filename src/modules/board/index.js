@@ -13,6 +13,7 @@ const initBoardRouter = (middleware) => {
   boardRouter.get('/', boardController.getAll);
   boardRouter.post('/', boardController.create);
   boardRouter.put('/:id', boardController.update);
+  boardRouter.put('/', boardController.updateSet);
   boardRouter.delete('/:id', boardController.delete);
 
   return boardRouter.routes();

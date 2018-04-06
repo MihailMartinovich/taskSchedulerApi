@@ -23,6 +23,14 @@ class BoardController {
     ctx.body = updatedBoard;
   }
 
+  static async updateSet(ctx) {
+    let data = ctx.request.body;
+
+    let updatedBoards = await Board.updateTaskSet(data);
+
+    ctx.body = updatedBoards;
+  }
+
   static async delete(ctx) {
     let id = ctx.params.id;
     let isDeleted = await Board.remove({ _id: id });

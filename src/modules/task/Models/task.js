@@ -66,9 +66,8 @@ TaskSchema.statics.removeTaskFromBoard = async function(data) {
 
 TaskSchema.statics.updateTaskSet = async function(data) {
   let updatedTasks = [];
-  console.log('-----------------------------------');
+
   for (var currentValue of data){
-    console.log(currentValue.order + ' ' + currentValue.title);
     let updated = await this.findOneAndUpdate({_id: currentValue._id}, { $set: { order: currentValue.order }}, {new: true});
     updatedTasks.push(updated);
   }
