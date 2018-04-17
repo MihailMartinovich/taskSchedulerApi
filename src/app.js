@@ -20,7 +20,8 @@ app.use(modules);
 
 
 app.use(async ctx => {
-  ctx.body = '<h1>summary</h1>';
+  ctx.body = '';
+  ctx.status = 404;
 });
 
 export default app;
