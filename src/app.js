@@ -16,6 +16,17 @@ app.use(cors({
 
 initRoutes(app);
 
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    console.log(err);
+
+    err.status = err.statusCode || err.status || 500;
+    throw err;
+  }
+});
+
 app.use(modules);
 
 
