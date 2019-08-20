@@ -1,12 +1,12 @@
 import Router from 'koa-router';
 import taskController from './controllers/TaskController';
-import { TASK_PREFIX } from "../../constants/prefixes";
-import checkUserPermissionsMiddleware from "../../middlewares/user/checkUserPermissions";
+import { TASK_PREFIX } from '../../constants/prefixes';
+import checkUserPermissionsMiddleware from '../../middlewares/user/checkUserPermissions';
 
 const taskRouter = new Router({prefix: TASK_PREFIX});
 
 const initTaskRouter = (middleware) => {
-  if(middleware) {
+  if (middleware) {
     taskRouter.use(middleware);
   }
 
@@ -22,5 +22,5 @@ const initTaskRouter = (middleware) => {
 
 export {
   taskRouter,
-  initTaskRouter
+  initTaskRouter,
 };

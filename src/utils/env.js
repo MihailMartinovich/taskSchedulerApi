@@ -7,7 +7,7 @@ const IS_PROD = ENV === envs.production;
 
 export {
   IS_DEV,
-  IS_PROD
-}
+  IS_PROD,
+};
 
 export default ENV;

@@ -7,5 +7,5 @@ export {
   API_PREFIX,
   AUTH_PREFIX,
   TASK_PREFIX,
-  BOARD_PREFIX
-}
+  BOARD_PREFIX,
+};

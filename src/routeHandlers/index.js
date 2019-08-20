@@ -5,7 +5,7 @@ import error from './error';
 import getCurrentUser from '../middlewares/user/getCurrentUser';
 
 export default (app) => {
-  if(IS_DEV){
+  if (IS_DEV) {
     app.use(logger());
   }
 

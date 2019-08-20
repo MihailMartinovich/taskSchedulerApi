@@ -5,5 +5,5 @@ const initUnprotectedRoutes = router => {
 };
 
 export {
-  initUnprotectedRoutes
-}
+  initUnprotectedRoutes,
+};

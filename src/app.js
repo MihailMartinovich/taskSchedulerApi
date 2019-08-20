@@ -1,5 +1,5 @@
 import Koa from 'koa2';
-import Cors from '@koa/cors';
+import cors from '@koa/cors';
 
 import initializeConnectors from './connectors';
 import initRoutes from './routeHandlers/';
@@ -9,9 +9,9 @@ initializeConnectors();
 
 const app = new Koa();
 
-app.use(Cors({
+app.use(cors({
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Methods': 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS'
+  'Access-Control-Allow-Methods': 'GET,HEAD,PUT,POST,DELETE,PATCH,OPTIONS',
 }));
 
 initRoutes(app);

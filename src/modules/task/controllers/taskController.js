@@ -17,7 +17,7 @@ class TaskController {
     let id = ctx.params.id;
     let newTaskData = _.pick(ctx.request.body, Task.createFields);
 
-    let updatedTask = await Task.findByIdAndUpdate(id, { $set :newTaskData}, { new: true} );
+    let updatedTask = await Task.findByIdAndUpdate(id, { $set: newTaskData}, { new: true} );
 
     ctx.body = updatedTask;
   }
@@ -34,7 +34,7 @@ class TaskController {
     let id = ctx.params.id;
     let deleted = await Task.removeTaskFromBoard({_id: id});
 
-    if(deleted){
+    if (deleted) {
       ctx.status = SUCCESS;
       ctx.body = deleted;
     }

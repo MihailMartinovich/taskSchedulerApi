@@ -4,33 +4,33 @@ import { User } from '../../user/models/';
 const BoardSchema = new Schema({
     title: {
       type: String,
-      required: 'Task title is required'
+      required: 'Task title is required',
     },
     description: {
-      type: String
+      type: String,
     },
     order: {
       type: Number,
-      default: 0
+      default: 0,
     },
     tasks: [{
       type: Schema.Types.ObjectId,
-      ref: 'Task'
+      ref: 'Task',
     }],
     owner: {
       type: Schema.Types.ObjectId,
       required: 'Owner is required',
-      ref: 'User'
-    }
+      ref: 'User',
+    },
   }, {
-    timestamps: true
+    timestamps: true,
   }
 );
 
 BoardSchema.statics.updateTaskSet = async function(data) {
   let updatedBoards = [];
 
-  for (var currentValue of data){
+  for (let currentValue of data) {
     let updated = await this.findOneAndUpdate({_id: currentValue._id}, { $set: { order: currentValue.order }}, {new: true})
       .populate('tasks')
       .exec();

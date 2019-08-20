@@ -1,4 +1,4 @@
-import {MONGO_URI} from "../config";
+import {MONGO_URI} from '../config';
 import mongooseConnector from './mongooseConnector';
 import server from '../server';
 
@@ -6,14 +6,14 @@ import server from '../server';
 async function initializeConnectors() {
   try {
     mongooseConnector(MONGO_URI);
-  } catch(e) {
+  } catch (e) {
     server.close();
     console.error(e);
   }
 }
 
 export {
-  initializeConnectors
-}
+  initializeConnectors,
+};
 
 export default initializeConnectors;

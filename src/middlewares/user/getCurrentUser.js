@@ -4,7 +4,7 @@ import {User} from '../../modules/user/index';
 export default () => async (ctx, next) => {
   const { authorization } = ctx.headers;
 
-  if(authorization) {
+  if (authorization) {
     try {
       const {email} = await JWTService.verifyToken(authorization);
       ctx.loggedUser = await User.findOne({ email });
@@ -15,4 +15,4 @@ export default () => async (ctx, next) => {
   }
 
   await next();
-}
+};

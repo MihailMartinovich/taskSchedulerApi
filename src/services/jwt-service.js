@@ -2,7 +2,7 @@ import jsonWebToken from 'jsonwebtoken';
 import { JWT_SECRET } from '../config';
 
 export default class JWTService {
-  static generateToken(data){
+  static generateToken(data) {
     return jsonWebToken.sign(data, JWT_SECRET);
   }
 

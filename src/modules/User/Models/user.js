@@ -10,34 +10,34 @@ const UserSchema = new Schema({
       unique: 'user with email "VALUE" already exist',
       lowercase: true,
       required: 'Email is required',
-      trim: true
+      trim: true,
     },
     password: {
       type: String,
       required: 'Password is required',
-      trim: true
+      trim: true,
     },
     username: {
       type: String,
       unique: 'user with username "VALUE" already exist',
       lowercase: true,
       required: 'Username is required',
-      trim: true
+      trim: true,
     },
     boards: [{
       type: Schema.Types.ObjectId,
       required: 'Board is required',
-      ref: 'Board'
-    }]
+      ref: 'Board',
+    }],
   }, {
-    timestamps: true
+    timestamps: true,
   }
 );
 
 UserSchema.statics.createFields = ['email', 'password', 'repeatPassword', 'username'];
 
 UserSchema.pre('save', function(next) {
-  if(!this.isModified('password')){
+  if (!this.isModified('password')) {
     return next();
   }
 

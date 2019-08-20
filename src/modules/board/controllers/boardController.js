@@ -18,7 +18,7 @@ class BoardController {
     let id = ctx.params.id;
     let newBoardData = pick(ctx.request.body, Board.createFields).value();
 
-    let updatedBoard = await Board.findByIdAndUpdate(id, { $set : newBoardData}, { new: true} );
+    let updatedBoard = await Board.findByIdAndUpdate(id, { $set: newBoardData}, { new: true} );
 
     ctx.body = updatedBoard;
   }
@@ -35,7 +35,7 @@ class BoardController {
     let id = ctx.params.id;
     let isDeleted = await Board.remove({ _id: id });
 
-    if(isDeleted && isDeleted.n > 0){
+    if (isDeleted && isDeleted.n > 0) {
       ctx.status = SUCCESS;
       ctx.body = id;
     }

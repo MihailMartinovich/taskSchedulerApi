@@ -9,18 +9,18 @@ function initUserSeeds() {
 
   _.times(10, (i) =>{
     const userPromise = User.create({
-      email:`${faker.lorem.word(2,10)}.${faker.lorem.word(2,5)}.com`,
-      username: `${faker.lorem.word(2,10)}` + i,
-      password: PASSWORD
+      email: `${faker.lorem.word(2, 10)}.${faker.lorem.word(2, 5)}.com`,
+      username: `${faker.lorem.word(2, 10)}` + i,
+      password: PASSWORD,
     });
 
     promises.push(userPromise);
   });
 
   let userPromise = User.create({
-    email:`admin@admin.com`,
+    email: `admin@admin.com`,
     username: 'admin',
-    password: 'admin'
+    password: 'admin',
   });
 
   promises.push(userPromise);

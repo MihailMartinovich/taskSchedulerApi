@@ -1,16 +1,20 @@
-import { MONGO_URI } from "../config";
+import { MONGO_URI } from '../config';
 import mongooseConnector from '../connectors/mongooseConnector';
 import initUserSeeds from './userSeeds';
 
 initSeeds();
 
 async function initSeeds() {
-  const mongoConnection = await mongooseConnector(MONGO_URI);
+  try {
+    const mongoConnection = await mongooseConnector(MONGO_URI);
 
-  await mongoConnection.connection.db.dropDatabase();
+    await mongoConnection.connection.db.dropDatabase();
 
-  let users = await initUserSeeds();
+    let users = await initUserSeeds();
 
-  console.log(users);
-  mongoConnection.connection.close();
+    console.log(users);
+    await mongoConnection.connection.close();
+  } catch (e) {
+    console.log(e);
+  }
 }

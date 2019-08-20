@@ -9,7 +9,7 @@ class authController {
   static async signUp(ctx) {
     let newUserData = pick(ctx.request.body, User.createFields).value();
 
-    if(!User.checkRepeatPasswordMatching(newUserData)){
+    if (!User.checkRepeatPasswordMatching(newUserData)) {
       ctx.throw(SIGNUP_ERROR_NUMBER, 'Passwords don\'t match');
     }
 
@@ -22,16 +22,16 @@ class authController {
 
   static async signIn(ctx) {
     const { email, password } = ctx.request.body;
-    if(!email || ! password){
+    if (!email || ! password) {
       ctx.throw(SIGNIN_ERROR_NUMBER, 'Email or password is invalid');
     }
 
     const user = await User.findOne({email});
-    if(!user){
+    if (!user) {
       ctx.throw(SIGNIN_ERROR_NUMBER, 'user with specified email not found');
     }
 
-    if(!user.comparePasswords(password)){
+    if (!user.comparePasswords(password)) {
       ctx.throw(SIGNIN_ERROR_NUMBER, 'Email or password is invalid(password)');
     }
 

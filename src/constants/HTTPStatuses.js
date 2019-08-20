@@ -5,5 +5,5 @@ const FORBIDDEN = 403;
 export {
   SUCCESS,
   NOT_FOUND,
-  FORBIDDEN
-}
+  FORBIDDEN,
+};

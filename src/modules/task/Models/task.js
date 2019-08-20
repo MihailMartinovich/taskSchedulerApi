@@ -4,31 +4,31 @@ import { Board } from '../../board/models/';
 const TaskSchema = new Schema({
     title: {
       type: String,
-      required: 'Task title is required'
+      required: 'Task title is required',
     },
     description: {
       type: String,
     },
     completed: {
       type: Boolean,
-      default: false
+      default: false,
     },
     order: {
       type: Number,
-      default: 0
+      default: 0,
     },
     board: {
       type: Schema.Types.ObjectId,
       required: 'Board is required',
-      ref: 'Board'
+      ref: 'Board',
     },
     owner: {
       type: Schema.Types.ObjectId,
       required: 'Owner is required',
-      ref: 'User'
-    }
+      ref: 'User',
+    },
   }, {
-    timestamps: true
+    timestamps: true,
   }
 );
 
@@ -38,7 +38,7 @@ TaskSchema.post('save', async function(task, next) {
   let board = await Board.findOne({ _id: task.board });
 
   let doesInclude = board.tasks.includes(task._id);
-  if(!doesInclude) {
+  if (!doesInclude) {
     board.tasks.push(task._id);
     board.save();
   }
@@ -51,11 +51,11 @@ TaskSchema.statics.removeTaskFromBoard = async function(data) {
 
   let deleted = await task.remove();
 
-  if(deleted) {
+  if (deleted) {
     let board = await Board.findOne({_id: task.board});
 
     let index = board.tasks.indexOf(task._id);
-    if(index > -1){
+    if (index > -1) {
       board.tasks.splice(index, 1);
       board.save();
     }
@@ -67,7 +67,7 @@ TaskSchema.statics.removeTaskFromBoard = async function(data) {
 TaskSchema.statics.updateTaskSet = async function(data) {
   let updatedTasks = [];
 
-  for (var currentValue of data){
+  for (let currentValue of data) {
     let updated = await this.findOneAndUpdate({_id: currentValue._id}, { $set: { order: currentValue.order }}, {new: true});
     updatedTasks.push(updated);
   }
